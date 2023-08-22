@@ -3,29 +3,37 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Bar } from 'vue-chartjs'
-
+import  EstaticBarConfig  from '@/models/EstaticBarConfig'
 
 @Component({ components: { Bar } })
 export default class Estatisticas extends Vue {
  
-    public data =  {
-        labels: [ 'January', 'February', 'March','alo'],
-        datasets: [
-          {
-            label: 'Data',
-            backgroundColor: ['#f87979', '#58D68D', '#3498DB','#000000'],
-            data: [40, 20, 12,30]
-          },  {
-            label: 'Data',
-            backgroundColor: ['#f87979', '#58D68D', '#3498DB','#000000'],
-            data: [40, 20, 12,30]
-          },
+  @Prop()
+  private labels!: string[];
 
+  @Prop()
+  private valores!: EstaticBarConfig[];
 
-        ]
+  public data ?: any;
+
+  @Watch("valores")
+  public beforeCreate(){
+    debugger;
+    let dataset = [];
+    for(let i = this.valores.length; i != 0; i--){
+      dataset.push({
+        label: this.valores[i].label,
+        backgroundColor:this.valores[i].cor,
+        data: this.valores[i].valores
+      })
     }
+    this.data = {
+      labels: this.labels,
+      datasets: dataset
+    }
+  }
     public options=  {
         responsive: true
       }

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import teste from '../components/teste.vue'
-import Estatisticas from '../components/estatisticas/Estatisticas.vue'
+import PaginaEstatisticas from '../components/estatisticas/Estatisticas.vue'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -13,7 +13,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/estatisticas',
     name: 'estatisticas',
-    component: Estatisticas,
+    component: PaginaEstatisticas,
   },
 ]
 
