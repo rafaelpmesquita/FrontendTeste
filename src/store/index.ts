@@ -1,23 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import estatisticas from './estatisticas';
 
-Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-    layout: "baseLayout",
-  },
-  mutations: {
-    SET_LAYOUT(state, value){
-      debugger;
-      state.layout = value;
-    }
-  },
-  actions: {
-    setLayout({commit}, data){
-      commit('SET_LAYOUT', data);
-    }
-  },
+
+Vue.use(Vuex);
+
+export class RootState {}
+
+const store = new Vuex.Store<RootState>({
   modules: {
-  }
-})
+    estatisticas
+  },
+});
+
+Object.assign(window, { $store: store });
+
+export default store;

@@ -8,17 +8,30 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Bar } from 'vue-chartjs'
 import EstaticBarConfig from '@/models/EstaticBarConfig'
 import Estatisticas from './Estatisticas.vue';
+import { namespace } from 'vuex-class';
+import { StoreNamespaces } from '../../store/namespaces';
+import { EstatisticasActionTypes } from '@/store/estatisticas/actions';
+import { EstatisticasGetterTypes } from '@/store/estatisticas/getters';
+
+const space = namespace(StoreNamespaces.ESTATISTICAS);
 @Component({ components: { Estatisticas } })
 export default class CardEstatisticas extends Vue {
+    @space.Action(
+        EstatisticasActionTypes.BUSCAR_VALORES_LABELS,
+    )
+    public buscarValores!: () => Promise<void>;
 
-    //isso aq terá q vir do store deixei fixo mas dps é so criar store e requisição
-    public valores: EstaticBarConfig[] = [
-        new EstaticBarConfig("Data", [40, 30, 50], ["#fff312"]),
-        new EstaticBarConfig("Data", [30, 10, 20], ["#ffg772"]),
-    ]
-    public labels: string[] = ["teste", "teste1"]
+    @space.Getter(EstatisticasGetterTypes.RESULTADO_VALORES)
+    public valores!: EstaticBarConfig[];
+
+    @space.Getter(EstatisticasGetterTypes.VALOR_LABELS)
+    public labels!: EstaticBarConfig[];
+
+    async onMounted() {
+        await this.buscarValores();
+    }
+
 }
 </script>

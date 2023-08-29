@@ -1,21 +1,14 @@
 <template>
     <div>
         <v-row>
-            <v-col :cols="qtdColsPorCard">
+            <v-col :cols="qtdColsPorCard" class="card-estatistica">
                 <card-estatisticas></card-estatisticas>
             </v-col>
-            <v-col :cols="qtdColsPorCard">
-                <card-estatisticas></card-estatisticas>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col :cols="qtdColsPorCard">
-                <card-estatisticas></card-estatisticas>
-            </v-col>
-            <v-col :cols="qtdColsPorCard">
+            <v-col :cols="qtdColsPorCard" class="card-estatistica">
                 <card-estatisticas></card-estatisticas>
             </v-col>
         </v-row>
+
     </div>
 </template>
 
@@ -29,3 +22,10 @@ export default class PaginaEstatisticas extends Vue {
     public qtdColsPorCard = Constantes.VALOR_COLS; //essa constante é para definir o tamanho do COL para dividir os graficos caso queria usar mais de um
 }
 </script>
+
+<style>
+.card-estatistica{
+    padding: 30px;
+}
+
+</style>
