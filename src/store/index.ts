@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import estatisticas from './estatisticas';
+import entradaSaida from './entradaSaida';
 
 
 
@@ -10,7 +11,8 @@ export class RootState {}
 
 const store = new Vuex.Store<RootState>({
   modules: {
-    estatisticas
+    estatisticas,
+    entradaSaida
   },
 });
 

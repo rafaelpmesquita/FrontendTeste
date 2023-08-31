@@ -18,20 +18,13 @@ import { EstatisticasGetterTypes } from '@/store/estatisticas/getters';
 const space = namespace(StoreNamespaces.ESTATISTICAS);
 @Component({ components: { Estatisticas } })
 export default class CardEstatisticas extends Vue {
-    @space.Action(
-        EstatisticasActionTypes.BUSCAR_VALORES_LABELS,
-    )
-    public buscarValores!: () => Promise<void>;
+    
 
     @space.Getter(EstatisticasGetterTypes.RESULTADO_VALORES)
     public valores!: EstaticBarConfig[];
 
     @space.Getter(EstatisticasGetterTypes.VALOR_LABELS)
     public labels!: EstaticBarConfig[];
-
-    async onMounted() {
-        await this.buscarValores();
-    }
 
 }
 </script>
