@@ -12,7 +12,7 @@ const mutations: MutationTree<EstatisticaState> = {
   [EstatisticasMutationTypes.ADD_VALORES_ESTATISTICAS](state: EstatisticaState, valores: EstaticBarConfig[]) {
     state.valores = valores;
   },
-  [EstatisticasMutationTypes.ADD_LABELS](state: EstatisticaState, labels: string) {
+  [EstatisticasMutationTypes.ADD_LABELS](state: EstatisticaState, labels: any[]) {
     state.labels = labels;
   },
 

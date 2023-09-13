@@ -56,12 +56,12 @@
       <entrada-saida-modal @fecharModal="janelaAberta = false" @aoExecutarAcao="concluirProcesso" />
     </v-dialog>
     <v-snackbar v-model="snackbar.ativa" color="white" class="">
-      <v-icon v-if="snackbar.icone == 'check_circle_outline'" style="color: green" class="mr-1">{{ snackbar.icone }}
+      <v-icon :color="snackbar.icone === 'mdi-check' ? 'green' : 'red'" class="mr-1">
+        {{ snackbar.icone }}
       </v-icon>
-      <v-icon v-else style="color: red" class="mr-1">{{ snackbar.icone }}
-      </v-icon>
-      <span class="textoSnackbar"> {{ snackbar.texto }}</span>
+      <span class="textoSnackbar">{{ snackbar.texto }}</span>
     </v-snackbar>
+    
   </v-container>
 </template>
 <script lang="ts">
@@ -96,10 +96,10 @@ export default class EntradaSaidaCard extends Vue {
   public async concluirProcesso(operacaoConcluida: any) {
     let mensagem =
       'Não foi possível concluir a operação. Tente novamente mais tarde.';
-    let icone = 'error_outline';
+    let icone = 'mdi-error';
     if (operacaoConcluida) {
       mensagem = 'Operação concluída com sucesso!';
-      icone = 'check_circle_outline';
+      icone = 'mdi-dots-vertical';
     }
     this.snackbar.texto = mensagem;
     this.snackbar.icone = icone;
@@ -126,4 +126,13 @@ export default class EntradaSaidaCard extends Vue {
   font-size: 24px;
   color: black;
 }
+
+.textoSnackbar{
+  color: black;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+}
+
 </style>

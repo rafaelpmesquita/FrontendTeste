@@ -3,11 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import { LoaderPlugin } from './commom/loader'
+import VueApexCharts from 'vue-apexcharts'
 
 Vue.config.productionTip = false
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
+Vue.use(LoaderPlugin);
 new Vue({
   router,
   store,

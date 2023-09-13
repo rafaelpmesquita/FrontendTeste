@@ -1,7 +1,15 @@
 <template>
     <div>
         <v-card variant="outlined">
-            <estatisticas :labels="labels" :valores="valores"></estatisticas>
+            <v-card-text>
+                <estatisticas :labels="labels" :valores="valores"></estatisticas>
+            <v-divider>
+            </v-divider>
+                <br>
+                <h1>Teste</h1>
+                <p>Grafico de teste</p>
+            </v-card-text>
+
         </v-card>
     </div>
 </template>
@@ -24,7 +32,7 @@ export default class CardEstatisticas extends Vue {
     public valores!: EstaticBarConfig[];
 
     @space.Getter(EstatisticasGetterTypes.VALOR_LABELS)
-    public labels!: EstaticBarConfig[];
+    public labels!: any[];
 
 }
 </script>

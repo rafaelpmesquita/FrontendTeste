@@ -96,12 +96,15 @@ export default class EntradaSaidaModal extends Vue {
     }
 
     public async adicionarEntradaSaida(request: any) {
+        this.$loader.iniciar();
         try {
             this.adicionarValores(request);
+            setTimeout(()=>console.log("teste"), 3000);
             this.enviarResposta(true);
         } catch (e) {
             this.enviarResposta(false);
         } finally {
+            this.$loader.finalizar();
             this.fecharModal;
         }
     }   
