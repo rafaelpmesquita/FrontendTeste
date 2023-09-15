@@ -1,6 +1,6 @@
 <template>
   <div>
-    <apexchart width="100%" type="bar" :options="options" :series="series"></apexchart>
+    <apexchart :type="type" :options="options" :series="series"></apexchart>
   </div>
 </template>
 
@@ -14,36 +14,47 @@ import { EstatisticasActionTypes } from '@/store/estatisticas/actions';
 const space = namespace(StoreNamespaces.ESTATISTICAS);
 
 @Component({ components: { apexchart: VueApexCharts } })
-export default class Estatisticas extends Vue {
+export default class EstatisticasBar extends Vue {
 
   @Prop() private labels!: string[];
   @Prop() private valores!: EstaticBarConfig[];
+  @Prop() public type!: string;
+
   @space.Action(
     EstatisticasActionTypes.BUSCAR_VALORES_LABELS,
   )
   public buscarValores!: () => Promise<void>;
-
-    public options: any = {
+   
+  public options: any = {
     xaxis: {
       categories: [],
     },
-    colors:[]
+    colors: [],
+    chart: {
+      height: '50px',
+      zoom: {
+        enabled: false
+      },
+    }
+
   };
-  
   public series: any = [];
+
   private async mounted() {
     await this.buscarValores();
-    let cores = [];
-    for (let i = this.valores.length - 1; i >= 0; i--) {
-      cores.push(this.valores[i].cor);
-      this.series.push({
-        name: this.valores[i].label,
-        data: this.valores[i].valores,
-      });
-    }
-    this.options.xaxis.categories = this.labels;
-    console.log(this.options.xaxis.categories)
-    this.options.colors = cores;
+    console.log(this.type)
+      let cores = [];
+      for (let i = this.valores.length - 1; i >= 0; i--) {
+        cores.push(this.valores[i].cor);
+        this.series.push({
+          name: this.valores[i].label,
+          data: this.valores[i].valores,
+        });
+      }
+      this.options.xaxis.categories = this.labels;
+      this.options.colors = cores;
+  
   }
 }
 </script>
+<style></style>

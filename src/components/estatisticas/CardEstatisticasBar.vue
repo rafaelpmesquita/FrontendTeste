@@ -2,7 +2,9 @@
     <div>
         <v-card variant="outlined">
             <v-card-text>
-                <estatisticas :labels="labels" :valores="valores"></estatisticas>
+                <div class="card-estatistica">
+                    <estatisticas-bar :labels="labels" :valores="valores" :type="type"></estatisticas-bar>
+                </div>
             <v-divider>
             </v-divider>
                 <br>
@@ -17,16 +19,17 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import EstaticBarConfig from '@/models/EstaticBarConfig'
-import Estatisticas from './Estatisticas.vue';
+import EstatisticasBar from './EstatisticasBar.vue';
 import { namespace } from 'vuex-class';
 import { StoreNamespaces } from '../../store/namespaces';
 import { EstatisticasActionTypes } from '@/store/estatisticas/actions';
 import { EstatisticasGetterTypes } from '@/store/estatisticas/getters';
 
 const space = namespace(StoreNamespaces.ESTATISTICAS);
-@Component({ components: { Estatisticas } })
-export default class CardEstatisticas extends Vue {
-    
+@Component({ components: { EstatisticasBar } })
+export default class CardEstatisticasBar extends Vue {
+
+    @Prop() public type!:string;
 
     @space.Getter(EstatisticasGetterTypes.RESULTADO_VALORES)
     public valores!: EstaticBarConfig[];
@@ -36,3 +39,9 @@ export default class CardEstatisticas extends Vue {
 
 }
 </script>
+<style>
+.card-estatistica{
+    padding: 30px;
+}
+
+</style>
