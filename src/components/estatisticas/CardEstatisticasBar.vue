@@ -1,47 +1,50 @@
 <template>
-    <div>
-        <v-card variant="outlined">
-            <v-card-text>
-                <div class="card-estatistica">
-                    <estatisticas-bar :labels="labels" :valores="valores" :type="type"></estatisticas-bar>
-                </div>
-            <v-divider>
-            </v-divider>
-                <br>
-                <h1>Teste</h1>
-                <p>Grafico de teste</p>
-            </v-card-text>
-
-        </v-card>
-    </div>
+    <v-snackbar v-model="snackbarInterno" color="white">
+        <v-icon :style="{ color: iconSnackbar === 'check_circle_outline' ? 'green' : 'red' }" class="mr-1">{{ iconSnackbar
+        }}</v-icon>
+        <span class="textoSnackbar">{{ textoSnackbar }}</span>
+    </v-snackbar>
 </template>
-
+  
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import EstaticBarConfig from '@/models/EstaticBarConfig'
-import EstatisticasBar from './EstatisticasBar.vue';
-import { namespace } from 'vuex-class';
-import { StoreNamespaces } from '../../store/namespaces';
-import { EstatisticasActionTypes } from '@/store/estatisticas/actions';
-import { EstatisticasGetterTypes } from '@/store/estatisticas/getters';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
-const space = namespace(StoreNamespaces.ESTATISTICAS);
-@Component({ components: { EstatisticasBar } })
-export default class CardEstatisticasBar extends Vue {
+@Component({
+    components: {},
+})
 
-    @Prop() public type!:string;
+export default class BaseSnackBar extends Vue {
+    @Prop()
+    public snackbar!: boolean;
 
-    @space.Getter(EstatisticasGetterTypes.RESULTADO_VALORES)
-    public valores!: EstaticBarConfig[];
+    @Prop()
+    public iconSnackbar!: string;
 
-    @space.Getter(EstatisticasGetterTypes.VALOR_LABELS)
-    public labels!: any[];
+    @Prop()
+    public textoSnackbar!: string;
+
+    public snackbarInterno: boolean = false;
+
+    @Watch('snackbar')
+    snackBarValue(val:boolean) {
+        this.snackbarInterno = val;
+    }
+
+    @Watch('snackbarInterno',{immediate:true})
+    snackBarValueInterno(val:boolean) {
+        this.$emit('snackbar-value',val)
+    }
+    
 
 }
 </script>
+  
 <style>
-.card-estatistica{
-    padding: 30px;
+.textoSnackbar {
+    color: black;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
 }
-
 </style>

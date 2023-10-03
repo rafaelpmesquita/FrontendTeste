@@ -24,7 +24,7 @@ export default class EstatisticasBar extends Vue {
     EstatisticasActionTypes.BUSCAR_VALORES_LABELS,
   )
   public buscarValores!: () => Promise<void>;
-   
+
   public options: any = {
     xaxis: {
       categories: [],
@@ -38,23 +38,25 @@ export default class EstatisticasBar extends Vue {
     }
 
   };
-  public series: any = [];
+  public series: any[] = [];
+
+  private async created() {
+    this.series = [];
+  }
 
   private async mounted() {
     await this.buscarValores();
-    console.log(this.type)
-      let cores = [];
-      for (let i = this.valores.length - 1; i >= 0; i--) {
-        cores.push(this.valores[i].cor);
-        this.series.push({
-          name: this.valores[i].label,
-          data: this.valores[i].valores,
-        });
-      }
-      this.options.xaxis.categories = this.labels;
-      this.options.colors = cores;
-  
+
+    let cores = [];
+    for (let i = this.valores.length - 1; i >= 0; i--) {
+      cores.push(this.valores[i].cor);
+      this.series.push({
+        name: this.valores[i].label,
+        data: this.valores[i].valores,
+      });
+    }
+    this.options.xaxis.categories = this.labels;
+    this.options.colors = cores;
   }
 }
 </script>
-<style></style>

@@ -27,9 +27,7 @@ export default class BaseSnackBar extends Vue {
 
     @Watch('snackbar')
     snackBarValue(val:boolean) {
-        console.log(this.snackbarInterno);
         this.snackbarInterno = val;
-        debugger;
     }
 
     @Watch('snackbarInterno',{immediate:true})
