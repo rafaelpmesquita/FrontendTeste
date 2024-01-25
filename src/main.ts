@@ -3,15 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-import { LoaderPlugin } from './commom/loader'
-import VueApexCharts from 'vue-apexcharts'
-import PrimeVue from 'primevue/config';
+import BaseLayout from './layout/BaseLayout.vue'
 
 Vue.config.productionTip = false
-Vue.use(PrimeVue)
-Vue.use(VueApexCharts)
-Vue.component('apexchart', VueApexCharts)
-Vue.use(LoaderPlugin);
+Vue.component('BaseLayout', BaseLayout)
 new Vue({
   router,
   store,
