@@ -1,20 +1,15 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import teste from '../components/teste.vue'
-import PaginaEstatisticas from '../components/estatisticas/PaginaEstatisticas.vue'
+import BaseLayout from '@/layout/BaseLayout.vue'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
     path: '/teste',
     name: 'teste',
-    component: teste,
+    component: BaseLayout,
   },
-  {
-    path: '/estatisticas',
-    name: 'estatisticas',
-    component: PaginaEstatisticas,
-  },
+
 ]
 
 const router = new VueRouter({
